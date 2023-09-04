@@ -143,6 +143,12 @@ ALWAYS_INLINE void GlobalObject::initGeneratedLazyClasses() {
                  init.setStructure(WebCore::JSFileSystemRouter::createStructure(init.vm, init.global, init.prototype));
                  init.setConstructor(WebCore::JSFileSystemRouter::createConstructor(init.vm, init.global, init.prototype));
               });
+    m_JSH2FrameParser.initLater(
+              [](LazyClassStructure::Initializer& init) {
+                 init.setPrototype(WebCore::JSH2FrameParser::createPrototype(init.vm, reinterpret_cast<Zig::GlobalObject*>(init.global)));
+                 init.setStructure(WebCore::JSH2FrameParser::createStructure(init.vm, init.global, init.prototype));
+                 init.setConstructor(WebCore::JSH2FrameParser::createConstructor(init.vm, init.global, init.prototype));
+              });
     m_JSHTMLRewriter.initLater(
               [](LazyClassStructure::Initializer& init) {
                  init.setPrototype(WebCore::JSHTMLRewriter::createPrototype(init.vm, reinterpret_cast<Zig::GlobalObject*>(init.global)));
